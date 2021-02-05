@@ -17,6 +17,7 @@ public:
 public:
     std::string             method;
     std::string             sid;    //TODO make optional
+    unix_ts_s_t             ts;
     GpApiAddArgsDesc::SP    args;
 };
 

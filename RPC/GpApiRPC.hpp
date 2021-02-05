@@ -11,3 +11,4 @@
 #include "GpApiCliTransportHttpFactory.hpp"
 #include "GpApiSrvRequestHandlerHttp.hpp"
 #include "GpApiTypeDetectorJsonFactory.hpp"
+#include "GpApiVoidDesc.hpp"

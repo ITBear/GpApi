@@ -2,6 +2,7 @@
 
 #include "GpApiRqDesc.hpp"
 #include "GpApiRsDesc.hpp"
+#include "GpApiCliTransportCtx.hpp"
 
 namespace GPlatform::API::RPC {
 
@@ -13,10 +14,16 @@ public:
 
 public:
                                 GpApiCliTransport   (void) noexcept;
+                                GpApiCliTransport   (GpApiCliTransportCtx::SP aCtx) noexcept;
     virtual                     ~GpApiCliTransport  (void) noexcept;
 
     virtual GpApiRsDesc::SP     ProcessRQ           (const GpApiRqDesc&         aRq,
                                                      const GpTypeStructInfo&    aRsTypeInfo) = 0;
+
+    GpApiCliTransportCtx::SP    Ctx                 (void) noexcept {return iCtx;}
+
+private:
+    GpApiCliTransportCtx::SP    iCtx;
 };
 
 }//namespace GPlatform::API::RPC

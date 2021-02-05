@@ -31,6 +31,8 @@ SOURCES += \
 	RPC/GpApiCli.cpp \
 	RPC/GpApiCliTransport.cpp \
 	RPC/GpApiCliTransportHttp.cpp \
+	RPC/GpApiCliTransportHttpCtx.cpp \
+	RPC/GpApiCliTransportHttpCtxFactory.cpp \
 	RPC/GpApiCliTransportHttpFactory.cpp \
 	RPC/GpApiMethodFactory.cpp \
 	RPC/GpApiMethodsManager.cpp \
@@ -39,7 +41,8 @@ SOURCES += \
 	RPC/GpApiRsDesc.cpp \
 	RPC/GpApiSrvRequestHandlerHttp.cpp \
 	RPC/GpApiTypeDetectorJson.cpp \
-	RPC/GpApiTypeDetectorJsonFactory.cpp
+	RPC/GpApiTypeDetectorJsonFactory.cpp \
+	RPC/GpApiVoidDesc.cpp
 
 HEADERS += \
     GpApi_global.hpp \
@@ -47,8 +50,11 @@ HEADERS += \
     RPC/GpApiAddArgsDesc.hpp \
     RPC/GpApiCli.hpp \
     RPC/GpApiCliTransport.hpp \
+    RPC/GpApiCliTransportCtx.hpp \
     RPC/GpApiCliTransportFactory.hpp \
     RPC/GpApiCliTransportHttp.hpp \
+    RPC/GpApiCliTransportHttpCtx.hpp \
+    RPC/GpApiCliTransportHttpCtxFactory.hpp \
     RPC/GpApiCliTransportHttpFactory.hpp \
     RPC/GpApiMethod.hpp \
     RPC/GpApiMethodFactory.hpp \
@@ -61,4 +67,5 @@ HEADERS += \
     RPC/GpApiTypeDetector.hpp \
     RPC/GpApiTypeDetectorFactory.hpp \
     RPC/GpApiTypeDetectorJson.hpp \
-    RPC/GpApiTypeDetectorJsonFactory.hpp
+    RPC/GpApiTypeDetectorJsonFactory.hpp \
+    RPC/GpApiVoidDesc.hpp

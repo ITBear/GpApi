@@ -2,7 +2,7 @@
 
 #include "GpApiMethodsManager.hpp"
 #include "GpApiTypeDetectorFactory.hpp"
-#include "../../GpNetwork/HTTP/GpHttpRequestHandler.hpp"
+#include "../../GpNetwork/L7/HTTP/GpHttpRequestHandler.hpp"
 
 namespace GPlatform::API::RPC {
 

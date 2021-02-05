@@ -16,6 +16,7 @@ void    GpApiRqDesc::_SCollectStructProps (GpTypePropInfo::C::Vec::Val& aPropsOu
 {
     PROP(method);
     PROP(sid);
+    PROP(ts);
     PROP(args);
 }
 

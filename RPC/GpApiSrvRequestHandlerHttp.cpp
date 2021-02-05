@@ -19,8 +19,15 @@ GpApiSrvRequestHandlerHttp::~GpApiSrvRequestHandlerHttp (void) noexcept
 GpHttpResponse::SP  GpApiSrvRequestHandlerHttp::OnRequest (const GpHttpRequest& aRequest) const
 {
     {
+        std::string_view bodySW = GpRawPtrCharR(aRequest.body).AsStringView();
+
+        if (bodySW.length() > 1024)
+        {
+            bodySW = bodySW.substr(0, 1024);
+        }
+
         std::cout << "[GpApiSrvRequestHandlerHttp::OnRequest]: --------------------------- RQ ---------------------------\n"_sv;
-        std::cout << GpRawPtrCharR(aRequest.body).AsStringView() << "\n";
+        std::cout << bodySW << "\n";
         std::cout.flush();
     }
 
@@ -71,14 +78,21 @@ GpHttpResponse::SP  GpApiSrvRequestHandlerHttp::OnRequest (const GpHttpRequest& 
     GpBytesArray rsBody = typeMapper->FromStruct(rs.VC());
 
     {
+        std::string_view bodySW = GpRawPtrCharR(rsBody).AsStringView();
+
+        if (bodySW.length() > 1024)
+        {
+            bodySW = bodySW.substr(0, 1024);
+        }
+
         std::cout << "[GpApiSrvRequestHandlerHttp::OnRequest]: --------------------------- RS ---------------------------\n"_sv;
-        std::cout << GpRawPtrCharR(rsBody).AsStringView() << "\n";
+        std::cout << bodySW << "\n";
         std::cout.flush();
     }
 
     GpHttpHeaders headers;
     headers
-        .SetContentType(GpHttpContentType::APPLICATION_JSON, GpHttpCharset::UTF_8)
+        .SetContentType(GpContentType::APPLICATION_JSON, GpCharset::UTF_8)
         .SetConnection(GpHttpConnectionFlag::KEEP_ALIVE)
         .SetCacheControl(GpHttpCacheControl::NO_STORE);
 

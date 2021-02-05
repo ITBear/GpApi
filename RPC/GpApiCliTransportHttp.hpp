@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GpApiCliTransport.hpp"
-#include "../../GpNetwork/GpNetwork.hpp"
+#include "GpApiCliTransportHttpCtx.hpp"
 
 namespace GPlatform::API::RPC {
 
@@ -14,6 +14,9 @@ public:
 public:
                                 GpApiCliTransportHttp   (std::string_view   aURL,
                                                          GpTypeMapper::SP   aTypeMapper);
+                                GpApiCliTransportHttp   (std::string_view               aURL,
+                                                         GpTypeMapper::SP               aTypeMapper,
+                                                         GpApiCliTransportHttpCtx::SP   aCtx);
     virtual                     ~GpApiCliTransportHttp  (void) noexcept override final;
 
     virtual GpApiRsDesc::SP     ProcessRQ               (const GpApiRqDesc&         aRq,
@@ -22,7 +25,7 @@ public:
 private:
     const std::string           iURL;
     GpTypeMapper::SP            iTypeMapper;
-    GpHttpClientCurl            iHttpClient;
+    GpHttpClientCurl            iHttpClient;    
 };
 
 }//namespace GPlatform::API::RPC

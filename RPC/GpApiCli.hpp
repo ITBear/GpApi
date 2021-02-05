@@ -15,6 +15,8 @@ public:
                                             GpApiCli        (GpApiCliTransport::SP aTransport) noexcept;
     virtual                                 ~GpApiCli       (void) noexcept;
 
+    GpApiCliTransport::SP                   Transport       (void) noexcept {return iTransport;}
+
     void                                    SetSID          (std::string_view aSid);
 
     template<typename RQ, typename RS>
@@ -36,9 +38,12 @@ private:
 };
 
 template<typename RQ, typename RS>
-typename RS::DataT  GpApiCli::ProcessRQ (const typename RQ::DataT&  aRqData,
-                                         GpApiAddArgsDesc::SP&      aRqAddArgs,
-                                         std::string_view           aMethodName)
+typename RS::DataT  GpApiCli::ProcessRQ
+(
+    const typename RQ::DataT&   aRqData,
+    GpApiAddArgsDesc::SP&       aRqAddArgs,
+    std::string_view            aMethodName
+)
 {
     RQ rq;
     rq.method   = aMethodName;
@@ -63,8 +68,11 @@ typename RS::DataT  GpApiCli::ProcessRQ (const typename RQ::DataT&  aRqData,
 }
 
 template<typename RQ, typename RS>
-typename RS::DataT  GpApiCli::ProcessRQ (const typename RQ::DataT&  aRqData,
-                                         std::string_view           aMethodName)
+typename RS::DataT  GpApiCli::ProcessRQ
+(
+    const typename RQ::DataT&   aRqData,
+    std::string_view            aMethodName
+)
 {
     RQ rq;
     rq.method   = aMethodName;

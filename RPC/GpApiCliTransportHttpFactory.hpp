@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GpApiCliTransportFactory.hpp"
+#include "GpApiCliTransportHttpCtxFactory.hpp"
 
 namespace GPlatform::API::RPC {
 
@@ -13,13 +14,17 @@ public:
 public:
                                     GpApiCliTransportHttpFactory    (std::string_view           aURL,
                                                                      GpTypeMapperFactory::SP    aTypeMapperFactory);
+                                    GpApiCliTransportHttpFactory    (std::string_view                       aURL,
+                                                                     GpTypeMapperFactory::SP                aTypeMapperFactory,
+                                                                     GpApiCliTransportHttpCtxFactory::SP    aCtxFactory);
     virtual                         ~GpApiCliTransportHttpFactory   (void) noexcept override final;
 
     virtual GpApiCliTransport::SP   NewInstance                     (void) const override final;
 
 private:
-    const std::string_view          iURL;
-    GpTypeMapperFactory::SP         iTypeMapperFactory;
+    const std::string_view              iURL;
+    GpTypeMapperFactory::SP             iTypeMapperFactory;
+    GpApiCliTransportHttpCtxFactory::SP iCtxFactory;
 };
 
 }//namespace GPlatform::API::RPC
