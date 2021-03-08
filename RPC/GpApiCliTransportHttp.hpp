@@ -19,7 +19,7 @@ public:
                                                          GpApiCliTransportHttpCtx::SP   aCtx);
     virtual                     ~GpApiCliTransportHttp  (void) noexcept override final;
 
-    virtual GpApiRsDesc::SP     ProcessRQ               (const GpApiRqDesc&         aRq,
+    virtual GpApiRsIfDesc::SP   ProcessRQ               (const GpApiRqIfDesc&           aRq,
                                                          const GpTypeStructInfo&    aRsTypeInfo) override final;
 
 private:

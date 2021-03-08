@@ -11,9 +11,4 @@ GpApiCli::~GpApiCli (void) noexcept
 {
 }
 
-void    GpApiCli::SetSID (std::string_view aSid)
-{
-    iSid = aSid;
-}
-
 }//namespace GPlatform::API::RPC

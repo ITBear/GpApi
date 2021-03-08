@@ -17,23 +17,16 @@ public:
 
     GpApiCliTransport::SP                   Transport       (void) noexcept {return iTransport;}
 
-    void                                    SetSID          (std::string_view aSid);
-
-    template<typename RQ, typename RS>
-    typename RS::DataT                      ProcessRQ       (const typename RQ::DataT&  aRqData,
-                                                             GpApiAddArgsDesc::SP&      aRqAddArgs,
-                                                             std::string_view           aMethodName);
-
     template<typename RQ, typename RS>
     typename RS::DataT                      ProcessRQ       (const typename RQ::DataT&  aRqData,
                                                              std::string_view           aMethodName);
 
 protected:
-    virtual void                            CheckRsResult   (const GpApiResultDesc& aRes,
+    virtual void                            CheckRsResult   (GpApiResultDesc::SP    aRes,
                                                              std::string_view       aMethodName) = 0;
+    virtual void                            OnProcessRQ     (GpApiRqIfDesc& aRq) = 0;
 
 private:
-    std::string                             iSid;
     GpApiCliTransport::SP                   iTransport;
 };
 
@@ -41,58 +34,25 @@ template<typename RQ, typename RS>
 typename RS::DataT  GpApiCli::ProcessRQ
 (
     const typename RQ::DataT&   aRqData,
-    GpApiAddArgsDesc::SP&       aRqAddArgs,
     std::string_view            aMethodName
 )
 {
     RQ rq;
-    rq.method   = aMethodName;
-    rq.data     = aRqData;
-    rq.args     = aRqAddArgs;
+    rq.SetMethod(aMethodName);
+    rq.SetPayload(std::make_any<typename RQ::DataTRefC>(aRqData));
 
-    if (iSid.length() > 0)
-    {
-        rq.sid = iSid;
-    }
+    OnProcessRQ(rq);
 
     //Do
-    GpApiRsDesc::SP rsBase = iTransport->ProcessRQ(rq, RS::STypeInfo());
+    GpApiRsIfDesc::SP rsBase = iTransport->ProcessRQ(rq, RS::STypeInfo());
 
     //Check result
-    CheckRsResult(rsBase->result.VC(), aMethodName);
-
-    //Cast type
-    RS rs = GpTypeManager::S().CastSP<RS>(rsBase);
-
-    return rs->data;
-}
-
-template<typename RQ, typename RS>
-typename RS::DataT  GpApiCli::ProcessRQ
-(
-    const typename RQ::DataT&   aRqData,
-    std::string_view            aMethodName
-)
-{
-    RQ rq;
-    rq.method   = aMethodName;
-    rq.data     = aRqData;
-
-    if (iSid.length() > 0)
-    {
-        rq.sid = iSid;
-    }
-
-    //Do
-    GpApiRsDesc::SP rsBase = iTransport->ProcessRQ(rq, RS::STypeInfo());
-
-    //Check result
-    CheckRsResult(rsBase->result.VC(), aMethodName);
+    CheckRsResult(rsBase->Result(), aMethodName);
 
     //Cast type
     RS& rs = GpTypeManager::S().Cast<RS>(rsBase.V());
 
-    return rs.data;
+    return std::any_cast<typename RS::DataTRef>(rs.Payload());
 }
 
 }//namespace GPlatform::API::RPC

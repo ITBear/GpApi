@@ -27,7 +27,6 @@ LIBS += -lGpJson$$TARGET_POSTFIX$$GP_JSON_LIB_V
 #------------------------------ LIBS END ---------------------------------
 
 SOURCES += \
-	RPC/GpApiAddArgsDesc.cpp \
 	RPC/GpApiCli.cpp \
 	RPC/GpApiCliTransport.cpp \
 	RPC/GpApiCliTransportHttp.cpp \
@@ -37,8 +36,10 @@ SOURCES += \
 	RPC/GpApiMethodFactory.cpp \
 	RPC/GpApiMethodsManager.cpp \
 	RPC/GpApiResultDesc.cpp \
-	RPC/GpApiRqDesc.cpp \
-	RPC/GpApiRsDesc.cpp \
+	RPC/GpApiRqBaseDesc.cpp \
+	RPC/GpApiRqIfDesc.cpp \
+	RPC/GpApiRsBaseDesc.cpp \
+	RPC/GpApiRsIfDesc.cpp \
 	RPC/GpApiSrvRequestHandlerHttp.cpp \
 	RPC/GpApiTypeDetectorJson.cpp \
 	RPC/GpApiTypeDetectorJsonFactory.cpp \
@@ -47,7 +48,6 @@ SOURCES += \
 HEADERS += \
     GpApi_global.hpp \
     GpApi.hpp \
-    RPC/GpApiAddArgsDesc.hpp \
     RPC/GpApiCli.hpp \
     RPC/GpApiCliTransport.hpp \
     RPC/GpApiCliTransportCtx.hpp \
@@ -61,8 +61,10 @@ HEADERS += \
     RPC/GpApiMethodsManager.hpp \
     RPC/GpApiRPC.hpp \
     RPC/GpApiResultDesc.hpp \
-    RPC/GpApiRqDesc.hpp \
-    RPC/GpApiRsDesc.hpp \
+    RPC/GpApiRqBaseDesc.hpp \
+    RPC/GpApiRqIfDesc.hpp \
+    RPC/GpApiRsBaseDesc.hpp \
+    RPC/GpApiRsIfDesc.hpp \
     RPC/GpApiSrvRequestHandlerHttp.hpp \
     RPC/GpApiTypeDetector.hpp \
     RPC/GpApiTypeDetectorFactory.hpp \

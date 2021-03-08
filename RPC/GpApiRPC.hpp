@@ -2,8 +2,10 @@
 
 #include "GpApiMethod.hpp"
 #include "GpApiMethodFactory.hpp"
-#include "GpApiRqDesc.hpp"
-#include "GpApiRsDesc.hpp"
+#include "GpApiRqIfDesc.hpp"
+#include "GpApiRsIfDesc.hpp"
+#include "GpApiRqBaseDesc.hpp"
+#include "GpApiRsBaseDesc.hpp"
 #include "GpApiMethodsManager.hpp"
 #include "GpApiCli.hpp"
 #include "GpApiCliTransport.hpp"

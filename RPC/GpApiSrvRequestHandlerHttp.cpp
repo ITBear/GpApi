@@ -3,9 +3,12 @@
 
 namespace GPlatform::API::RPC {
 
-GpApiSrvRequestHandlerHttp::GpApiSrvRequestHandlerHttp (GpApiMethodsManager::SP         aApiManager,
-                                                        GpTypeMapperFactory::SP         aTypeMapperFactory,
-                                                        GpApiTypeDetectorFactory::SP    aTypeDetectorFactory) noexcept:
+GpApiSrvRequestHandlerHttp::GpApiSrvRequestHandlerHttp
+(
+    GpApiMethodsManager::SP         aApiManager,
+    GpTypeMapperFactory::SP         aTypeMapperFactory,
+    GpApiTypeDetectorFactory::SP    aTypeDetectorFactory
+) noexcept:
 iApiManager(std::move(aApiManager)),
 iTypeMapperFactory(std::move(aTypeMapperFactory)),
 iTypeDetectorFactory(std::move(aTypeDetectorFactory))
@@ -31,8 +34,8 @@ GpHttpResponse::SP  GpApiSrvRequestHandlerHttp::OnRequest (const GpHttpRequest& 
         std::cout.flush();
     }
 
-    GpApiRqDesc::SP rq;
-    GpApiRsDesc::SP rs;
+    GpApiRqIfDesc::SP rq;
+    GpApiRsIfDesc::SP rs;
 
     auto typeMapper = iTypeMapperFactory->NewInstance();
 
@@ -43,35 +46,35 @@ GpHttpResponse::SP  GpApiSrvRequestHandlerHttp::OnRequest (const GpHttpRequest& 
         const GpTypeStructInfo& rqTypeInfo      = typeDetector->DetectTypeInfo();
 
         //Deserialize RQ data
-        rq = typeMapper->ToStruct(aRequest.body, rqTypeInfo).CastAs<GpApiRqDesc::SP>();
+        rq = typeMapper->ToStruct(aRequest.body, rqTypeInfo).CastAs<GpApiRqIfDesc::SP>();
 
         //Find method and call
-        GpApiMethod::SP method = iApiManager->Find(rq->method);
+        GpApiMethod::SP method = iApiManager->Find(rq->Method());
 
         auto result = CallAndCatch([&](){rs = method->Process(rq.Vn());});
 
         if (rs.IsNULL())
         {
-            rs = method->RsTypeInfo().NewInstance().CastAs<GpApiRsDesc::SP>();
+            rs = method->RsTypeInfo().NewInstance().CastAs<GpApiRsIfDesc::SP>();
         }
 
-        rs->result = result;
+        rs->SetResult(result);
     } catch (const std::exception& e)
     {
         if (rs.IsNULL())
         {
-            rs = MakeSP<GpApiRsDesc>();
+            rs = iApiManager->NewDefaultRs();
         }
 
-        rs->result = GenResultEx(e);
+        rs->SetResult(GenResultEx(e));
     } catch (...)
     {
         if (rs.IsNULL())
         {
-            rs = MakeSP<GpApiRsDesc>();
+            rs = iApiManager->NewDefaultRs();
         }
 
-        rs->result = GenResultExUnknown();
+        rs->SetResult(GenResultExUnknown());
     }
 
     //Struct to Json
@@ -96,9 +99,12 @@ GpHttpResponse::SP  GpApiSrvRequestHandlerHttp::OnRequest (const GpHttpRequest& 
         .SetConnection(GpHttpConnectionFlag::KEEP_ALIVE)
         .SetCacheControl(GpHttpCacheControl::NO_STORE);
 
-    GpHttpResponse::SP httpRs = MakeSP<GpHttpResponse>(GpHttpResponseCode::OK_200,
-                                                       std::move(headers),
-                                                       std::move(rsBody));
+    GpHttpResponse::SP httpRs = MakeSP<GpHttpResponse>
+    (
+        GpHttpResponseCode::OK_200,
+        std::move(headers),
+        std::move(rsBody)
+    );
 
     return httpRs;
 }

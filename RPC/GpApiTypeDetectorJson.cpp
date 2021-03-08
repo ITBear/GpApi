@@ -21,7 +21,7 @@ const GpTypeStructInfo& GpApiTypeDetectorJson::DetectTypeInfo (void) const
     rapidjson::Document::ConstObject            jsonObject  = GpJsonToStruct::SParseJsonDom(iData, jsonDOM);
     rapidjson::Document::ConstMemberIterator    mit         = jsonObject.FindMember("method");
 
-    THROW_GPE_COND_CHECK_M
+    THROW_GPE_COND
     (
         mit != jsonObject.MemberEnd(),
         "Json member 'method' was not found"_sv

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GpApiRqDesc.hpp"
-#include "GpApiRsDesc.hpp"
+#include "GpApiRqIfDesc.hpp"
+#include "GpApiRsIfDesc.hpp"
 
 namespace GPlatform::API::RPC {
 
@@ -15,7 +15,7 @@ public:
                                     GpApiMethod     (void) noexcept {}
     virtual                         ~GpApiMethod    (void) noexcept {}
 
-    virtual GpApiRsDesc::SP         Process         (GpApiRqDesc& aRq) = 0;
+    virtual GpApiRsIfDesc::SP       Process         (GpApiRqIfDesc& aRq) = 0;
     virtual const GpTypeStructInfo& RqTypeInfo      (void) const noexcept = 0;
     virtual const GpTypeStructInfo& RsTypeInfo      (void) const noexcept = 0;
 };
@@ -37,12 +37,12 @@ public: \
                                     NAME        (void) noexcept; \
     virtual                         ~NAME       (void) noexcept override final; \
  \
-    virtual GpApiRsDesc::SP         Process     (GpApiRqDesc& aRq) override final; \
+    virtual GpApiRsIfDesc::SP       Process     (GpApiRqIfDesc& aRq) override final; \
     virtual const GpTypeStructInfo& RqTypeInfo  (void) const noexcept override final; \
     virtual const GpTypeStructInfo& RsTypeInfo  (void) const noexcept override final; \
  \
 protected: \
-    typename RsT::DataT             Process             (RqT& aRq); \
+    typename RsT::DataT             Process     (RqT& aRq); \
 };
 
 #define API_METHOD_IMPL(NAME) \
@@ -74,11 +74,11 @@ NAME::~NAME (void) noexcept \
 { \
 } \
  \
-GpApiRsDesc::SP NAME::Process (GpApiRqDesc& aRq) \
+GpApiRsIfDesc::SP   NAME::Process (GpApiRqIfDesc& aRq) \
 { \
-    RsT::SP rs = MakeSP<RsT>(); \
- \
-    rs.Vn().data = Process(static_cast<RqT&>(aRq)); \
+    RsT::SP     rs      = MakeSP<RsT>(); \
+    RsT::DataT  rsData  = Process(static_cast<RqT&>(aRq)); \
+    rs.Vn().SetPayload(std::make_any<typename RsT::DataTRef>(rsData)); \
  \
     return rs; \
 } \
@@ -91,6 +91,6 @@ const GpTypeStructInfo& NAME::RqTypeInfo (void) const noexcept \
 const GpTypeStructInfo& NAME::RsTypeInfo (void) const noexcept \
 { \
     return RsT::STypeInfo(); \
-} \
+}
 
 }//namespace GPlatform::API::RPC

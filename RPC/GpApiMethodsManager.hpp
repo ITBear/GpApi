@@ -21,6 +21,8 @@ public:
     void                        Register                (GpApiMethodFactory::SP aFactory);
     GpApiMethod::SP             Find                    (std::string_view aName) const;
 
+    virtual GpApiRsIfDesc::SP   NewDefaultRs            (void) const = 0;
+
 protected:
     virtual void                OnInit                  (void) = 0;
     [[noreturn]] virtual void   OnMethodNotFoundEx      (std::string_view aName) const = 0;

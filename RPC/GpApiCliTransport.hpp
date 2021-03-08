@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GpApiRqDesc.hpp"
-#include "GpApiRsDesc.hpp"
+#include "GpApiRqIfDesc.hpp"
+#include "GpApiRsIfDesc.hpp"
 #include "GpApiCliTransportCtx.hpp"
 
 namespace GPlatform::API::RPC {
@@ -17,7 +17,7 @@ public:
                                 GpApiCliTransport   (GpApiCliTransportCtx::SP aCtx) noexcept;
     virtual                     ~GpApiCliTransport  (void) noexcept;
 
-    virtual GpApiRsDesc::SP     ProcessRQ           (const GpApiRqDesc&         aRq,
+    virtual GpApiRsIfDesc::SP   ProcessRQ           (const GpApiRqIfDesc&       aRq,
                                                      const GpTypeStructInfo&    aRsTypeInfo) = 0;
 
     GpApiCliTransportCtx::SP    Ctx                 (void) noexcept {return iCtx;}

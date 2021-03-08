@@ -29,9 +29,9 @@ GpApiCliTransportHttp::~GpApiCliTransportHttp (void) noexcept
 {
 }
 
-GpApiRsDesc::SP GpApiCliTransportHttp::ProcessRQ
+GpApiRsIfDesc::SP   GpApiCliTransportHttp::ProcessRQ
 (
-    const GpApiRqDesc&      aRq,
+    const GpApiRqIfDesc&    aRq,
     const GpTypeStructInfo& aRsTypeInfo
 )
 {
@@ -61,12 +61,15 @@ GpApiRsDesc::SP GpApiCliTransportHttp::ProcessRQ
         }
 
         //Prepate HTTP RQ
+        GpHttpHeaders rqHeaders;//TODO: move to UP
+        rqHeaders.Add(GpHttpHeaderType::CONTENT_TYPE, "application/json"_sv);
+
         httpRq = MakeSP<GpHttpRequest>
         (
             GpHttpVersion::HTTP_1_1,
             GpHttpRequestType::POST,
             iURL,
-            GpHttpHeaders(),
+            rqHeaders,
             std::move(body)
         );
 
@@ -102,7 +105,7 @@ GpApiRsDesc::SP GpApiCliTransportHttp::ProcessRQ
         throw;
     }
 
-    return rsStruct.CastAs<GpApiRsDesc::SP>();
+    return rsStruct.CastAs<GpApiRsIfDesc::SP>();
 }
 
 }//namespace GPlatform::API::RPC
