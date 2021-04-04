@@ -1,16 +1,7 @@
 #pragma once
 
-#include "GpApiMethod.hpp"
-#include "GpApiMethodFactory.hpp"
-#include "GpApiRqIfDesc.hpp"
-#include "GpApiRsIfDesc.hpp"
-#include "GpApiRqBaseDesc.hpp"
-#include "GpApiRsBaseDesc.hpp"
-#include "GpApiMethodsManager.hpp"
-#include "GpApiCli.hpp"
-#include "GpApiCliTransport.hpp"
-#include "GpApiCliTransportFactory.hpp"
-#include "GpApiCliTransportHttpFactory.hpp"
-#include "GpApiSrvRequestHandlerHttp.hpp"
-#include "GpApiTypeDetectorJsonFactory.hpp"
+#include "RqRs/GpApiRqRs.hpp"
+#include "Client/GpApiClient.hpp"
+#include "Server/GpApiServer.hpp"
+
 #include "GpApiVoidDesc.hpp"
