@@ -17,14 +17,14 @@ GpApiRsResultDesc::SP   GpApiRsRawDesc::Result (void)
     THROW_GPE("Disabled for Raw RS"_sv);
 }
 
-void    GpApiRsRawDesc::SetResult (GpApiRsResultDesc::SP aResult)
+void    GpApiRsRawDesc::SetResult (GpApiRsResultDesc::SP /*aResult*/)
 {
     THROW_GPE("Disabled for Raw RS"_sv);
 }
 
-void    GpApiRsRawDesc::_SCollectStructProps (GpTypePropInfo::C::Vec::Val& aPropsOut)
+void    GpApiRsRawDesc::_SCollectStructProps (GpTypePropInfo::C::Vec::Val& /*aPropsOut*/)
 {
-    THROW_GPE("Disabled for Raw RS"_sv);
+    //PROP()
 }
 
 }//namespace GPlatform::API::RPC

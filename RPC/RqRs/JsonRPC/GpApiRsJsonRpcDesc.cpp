@@ -12,6 +12,11 @@ GpApiRsJsonRpcDesc::~GpApiRsJsonRpcDesc (void) noexcept
 {
 }
 
+GpApiRsResultDesc::CSP  GpApiRsJsonRpcDesc::Result (void) const
+{
+    return error;
+}
+
 GpApiRsResultDesc::SP   GpApiRsJsonRpcDesc::Result (void)
 {
     return error;

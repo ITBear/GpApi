@@ -12,6 +12,11 @@ GpApiRsGpRpcDesc::~GpApiRsGpRpcDesc (void) noexcept
 {
 }
 
+GpApiRsResultDesc::CSP  GpApiRsGpRpcDesc::Result (void) const
+{
+    return result;
+}
+
 GpApiRsResultDesc::SP   GpApiRsGpRpcDesc::Result (void)
 {
     return result;

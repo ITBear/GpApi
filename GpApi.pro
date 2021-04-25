@@ -48,7 +48,6 @@ HEADERS += \
     GpApi.hpp \
     RPC/Client/GpApiClient.hpp \
 	RPC/Client/Transport/GpApiCliTransport.hpp \
-	RPC/Client/Transport/GpApiCliTransportCtx.hpp \
 	RPC/Client/Transport/GpApiCliTransportFactory.hpp \
 	RPC/Client/Transport/GpApiCliTransports.hpp \
     RPC/GpApiRPC.hpp \

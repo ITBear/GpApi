@@ -14,6 +14,7 @@ public:
                                         GpApiRsJsonRpcDesc  (void) noexcept;
     virtual                             ~GpApiRsJsonRpcDesc (void) noexcept override;
 
+    virtual GpApiRsResultDesc::CSP      Result              (void) const override final;
     virtual GpApiRsResultDesc::SP       Result              (void) override final;
     virtual void                        SetResult           (GpApiRsResultDesc::SP aResult) override final;
 

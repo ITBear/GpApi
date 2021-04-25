@@ -14,22 +14,22 @@ GpApiRsIfDesc::~GpApiRsIfDesc (void) noexcept
 
 GpApiRsResultDesc::CSP  GpApiRsIfDesc::Result (void) const
 {
-    THROW_GPE_NOT_IMPLEMENTED();
+    THROW_GPE("Need to be overridden"_sv);
 }
 
 GpApiRsResultDesc::SP   GpApiRsIfDesc::Result (void)
 {
-    THROW_GPE_NOT_IMPLEMENTED();
+    THROW_GPE("Need to be overridden"_sv);
 }
 
 void    GpApiRsIfDesc::SetResult (GpApiRsResultDesc::SP /*aResult*/)
 {
-    THROW_GPE_NOT_IMPLEMENTED();
+    THROW_GPE("Need to be overridden"_sv);
 }
 
 std::any    GpApiRsIfDesc::Payload (void) const
 {
-    THROW_GPE_NOT_IMPLEMENTED();
+    THROW_GPE("Need to be overridden"_sv);
 }
 
 std::any    GpApiRsIfDesc::Payload (void)
