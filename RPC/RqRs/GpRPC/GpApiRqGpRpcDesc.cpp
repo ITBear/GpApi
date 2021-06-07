@@ -26,7 +26,6 @@ void    GpApiRqGpRpcDesc::_SCollectStructProps (GpTypePropInfo::C::Vec::Val& aPr
 {
     PROP(method);
     PROP(sid);
-    PROP(ts);
 }
 
 }//namespace GPlatform::API::RPC

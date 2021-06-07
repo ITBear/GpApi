@@ -24,7 +24,7 @@ GpApiRsResultDesc::SP   GpApiRsJsonRpcDesc::Result (void)
 
 void    GpApiRsJsonRpcDesc::SetResult (GpApiRsResultDesc::SP aResult)
 {
-    error = std::move(aResult);
+    error = GpTypeManager::S().CastSP<GpApiRsJsonRpcResultDesc::SP>(aResult);
 }
 
 void    GpApiRsJsonRpcDesc::_SCollectStructProps (GpTypePropInfo::C::Vec::Val& aPropsOut)

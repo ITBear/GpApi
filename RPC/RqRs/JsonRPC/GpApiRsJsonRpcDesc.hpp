@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../GpApiRsIfDesc.hpp"
+#include "GpApiRsJsonRpcResultDesc.hpp"
 
 namespace GPlatform::API::RPC {
 
@@ -21,7 +22,7 @@ public:
 public:
     std::string                         jsonrpc = std::string("2.0"_sv);
     s_int_64                            id      = 1;
-    GpApiRsResultDesc::SP               error;
+    GpApiRsJsonRpcResultDesc::SP        error;
 };
 
 #define JSON_RPC_API_RS(PREFIX, NAME, UUID) \
