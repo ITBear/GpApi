@@ -93,7 +93,7 @@ void    NAME##_rq::SetPayload (std::any aAny) \
  \
 void    NAME##_rq::_SCollectStructProps (GpTypePropInfo::C::Vec::Val& aPropsOut) \
 { \
-    PROP(params); \
+    PROP_F(params, (GpTypePropFlags{GpTypePropFlags::value_type{GpTypePropFlag::AS_TUPLE, ""_sv}})); \
 }
 
 }//namespace GPlatform::API::RPC
