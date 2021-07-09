@@ -7,7 +7,7 @@ namespace GPlatform::API::RPC {
 class GpApiCliTransportFactory
 {
 public:
-    CLASS_REMOVE_CTRS_EXCEPT_DEFAULT(GpApiCliTransportFactory)
+    CLASS_REMOVE_CTRS_MOVE_COPY(GpApiCliTransportFactory)
     CLASS_DECLARE_DEFAULTS(GpApiCliTransportFactory)
 
 protected:

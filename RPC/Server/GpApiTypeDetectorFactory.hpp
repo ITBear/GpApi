@@ -8,7 +8,7 @@ namespace GPlatform::API::RPC {
 class GpApiTypeDetectorFactory
 {
 public:
-    CLASS_REMOVE_CTRS_EXCEPT_DEFAULT(GpApiTypeDetectorFactory)
+    CLASS_REMOVE_CTRS_MOVE_COPY(GpApiTypeDetectorFactory)
     CLASS_DECLARE_DEFAULTS(GpApiTypeDetectorFactory)
 
 protected:

@@ -7,7 +7,7 @@ namespace GPlatform::API::RPC {
 class GPAPI_API GpApiTypeDetectorJsonFactory final: public GpApiTypeDetectorFactory
 {
 public:
-    CLASS_REMOVE_CTRS_EXCEPT_DEFAULT(GpApiTypeDetectorJsonFactory)
+    CLASS_REMOVE_CTRS_MOVE_COPY(GpApiTypeDetectorJsonFactory)
     CLASS_DECLARE_DEFAULTS(GpApiTypeDetectorJsonFactory)
 
 public:

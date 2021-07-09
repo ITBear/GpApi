@@ -7,7 +7,7 @@ namespace GPlatform::API::RPC {
 class GPAPI_API GpApiMethodsManager
 {
 public:
-    CLASS_REMOVE_CTRS_EXCEPT_DEFAULT(GpApiMethodsManager)
+    CLASS_REMOVE_CTRS_MOVE_COPY(GpApiMethodsManager)
     CLASS_DECLARE_DEFAULTS(GpApiMethodsManager)
 
     using MethodFactoriesT = GpElementsCatalog<std::string_view, GpApiMethodFactory::SP>;

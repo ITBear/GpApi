@@ -8,7 +8,7 @@ namespace GPlatform::API::RPC {
 class GPAPI_API GpApiCliTransport
 {
 public:
-    CLASS_REMOVE_CTRS_EXCEPT_DEFAULT(GpApiCliTransport)
+    CLASS_REMOVE_CTRS_MOVE_COPY(GpApiCliTransport)
     CLASS_DECLARE_DEFAULTS(GpApiCliTransport)
 
     using ProcessRqRsFnT = std::function<void(std::any aRq)>;

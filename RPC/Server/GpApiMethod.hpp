@@ -8,7 +8,7 @@ namespace GPlatform::API::RPC {
 class GpApiMethod
 {
 public:
-    CLASS_REMOVE_CTRS_EXCEPT_DEFAULT(GpApiMethod)
+    CLASS_REMOVE_CTRS_MOVE_COPY(GpApiMethod)
     CLASS_DECLARE_DEFAULTS(GpApiMethod)
 
 public:
@@ -25,7 +25,7 @@ public:
 class NAME final: public GpApiMethod \
 { \
 public: \
-    CLASS_REMOVE_CTRS_EXCEPT_DEFAULT(NAME) \
+    CLASS_REMOVE_CTRS_MOVE_COPY(NAME) \
     CLASS_DECLARE_DEFAULTS(NAME) \
  \
     using RqT   = NAME##_rq; \
@@ -50,7 +50,7 @@ protected: \
 class NAME##_Factory final: public GpApiMethodFactory \
 { \
 public: \
-    CLASS_REMOVE_CTRS_EXCEPT_DEFAULT(NAME##_Factory) \
+    CLASS_REMOVE_CTRS_MOVE_COPY(NAME##_Factory) \
     CLASS_DECLARE_DEFAULTS(NAME##_Factory) \
  \
 public: \

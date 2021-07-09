@@ -7,7 +7,7 @@ namespace GPlatform::API::RPC {
 class GPAPI_API GpApiMethodFactory
 {
 public:
-    CLASS_REMOVE_CTRS(GpApiMethodFactory)
+    CLASS_REMOVE_CTRS_DEFAULT_MOVE_COPY(GpApiMethodFactory)
     CLASS_DECLARE_DEFAULTS(GpApiMethodFactory)
 
 public:
