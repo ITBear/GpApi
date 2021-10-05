@@ -4,32 +4,8 @@ namespace GPlatform::API::RPC {
 
 TYPE_STRUCT_IMPLEMENT(GpApiRsGpRpcDesc, GP_MODULE_UUID)
 
-GpApiRsGpRpcDesc::GpApiRsGpRpcDesc (void) noexcept
+void    GpApiRsGpRpcDesc::_SCollectStructProps (GpTypePropInfo::C::Vec::Val& /*aPropsOut*/)
 {
-}
-
-GpApiRsGpRpcDesc::~GpApiRsGpRpcDesc (void) noexcept
-{
-}
-
-GpApiRsResultDesc::CSP  GpApiRsGpRpcDesc::Result (void) const
-{
-    return result;
-}
-
-GpApiRsResultDesc::SP   GpApiRsGpRpcDesc::Result (void)
-{
-    return result;
-}
-
-void    GpApiRsGpRpcDesc::SetResult (GpApiRsResultDesc::SP aResult)
-{
-    result = std::move(aResult);
-}
-
-void    GpApiRsGpRpcDesc::_SCollectStructProps (GpTypePropInfo::C::Vec::Val& aPropsOut)
-{
-    PROP(result);
 }
 
 }//namespace GPlatform::API::RPC
